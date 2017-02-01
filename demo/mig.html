@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migration in China</title>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.css">
+    <script type="text/javascript" src="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.min.js"></script>
+    <script type="text/javascript" src="../dist/maptalks.odline.js"></script>
+    <script type="text/javascript" src="geocoord.js"></script>
+    <style type="text/css">
+        html,body{
+            margin:0px;
+            height:100%;
+            width: 100%;
+         }
+    </style>
+</head>
+<body scroll="no">
+<div style="width:100%;height:100%;" id="map"></div>
+<script type="text/javascript" >
+    var map = new maptalks.Map("map",{
+        center : [111.28779, 31.81443],
+        zoom   :  6,
+        attributionControl : {
+          'content' : '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        },
+        baseLayer : new maptalks.TileLayer('tile',{
+            'urlTemplate' : 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
+            'subdomains'  : ['a','b','c','d','e']
+        })
+    });
+    function getGeoCoord(name) {
+        var city = name.split('_').pop();
+        var coord;
+        coord = geoCoord[city];
+        return coord;
+    }
+    maptalks.Ajax.getJSON(
+        'http://7xp3u9.com1.z0.glb.clouddn.com/srcmigration.json',
+        function(err, data) {
+            // prepare data
+            var lines = data.allLine.map(function(line) {
+                return {
+                    'coordinates' : [
+                        getGeoCoord(line.start),
+                        getGeoCoord(line.end)
+                     ]
+                }
+            });
+
+            // static OD Lines in background
+            var lineLayer = new maptalks.ODLineLayer('c1', lines, {
+                'animation' : false,
+                'curveness' : 0,
+                'globalCompositeOperation' : 'lighter',
+                'symbol' : {
+                    'lineWidth' : 2,
+                    'lineColor' : 'rgba(2, 166, 253, 0.03)', //'rgba(80, 64, 66, 0.1)',//
+                }
+            }).addTo(map);
+
+            // animated OD Lines
+            var animLayer = new maptalks.ODLineLayer('c', lines, {
+                'duration' : 30000,
+                'animation' : true,
+                'curveness' : 0,
+                'random' : true,
+                'trail' : 10,
+                'symbol' : {
+                    'lineColor' : '#fff'
+                }
+            }).addTo(map);
+        }
+    );
+</script>
+</body>
+</html>
