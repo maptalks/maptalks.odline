@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.css">
     <script type="text/javascript" src="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.min.js"></script>
     <script type="text/javascript" src="../dist/maptalks.odline.js"></script>
-    <script type="text/javascript" src="geocoord.js"></script>
+    <script type="text/javascript" src="lines.js"></script>
     <style type="text/css">
         html,body{
             margin:0px;
@@ -30,49 +30,28 @@
             'subdomains'  : ['a','b','c','d','e']
         })
     });
-    function getGeoCoord(name) {
-        var city = name.split('_').pop();
-        var coord;
-        coord = geoCoord[city];
-        return coord;
-    }
-    maptalks.Ajax.getJSON(
-        'srcmigration.json',
-        function(err, data) {
-            // prepare data
-            var lines = data.allLine.map(function(line) {
-                return {
-                    'coordinates' : [
-                        getGeoCoord(line.start),
-                        getGeoCoord(line.end)
-                     ]
-                }
-            });
-
-            // static OD Lines in background
-            var lineLayer = new maptalks.ODLineLayer('c1', lines, {
-                'animation' : false,
-                'curveness' : 0,
-                'globalCompositeOperation' : 'lighter',
-                'symbol' : {
-                    'lineWidth' : 2,
-                    'lineColor' : 'rgba(2, 166, 253, 0.03)', //'rgba(80, 64, 66, 0.1)',//
-                }
-            }).addTo(map);
-
-            // animated OD Lines
-            var animLayer = new maptalks.ODLineLayer('c', lines, {
-                'duration' : 30000,
-                'animation' : true,
-                'curveness' : 0,
-                'random' : true,
-                'trail' : 10,
-                'symbol' : {
-                    'lineColor' : '#fff'
-                }
-            }).addTo(map);
+    // lines is the data from ./line.js
+    var lineLayer = new maptalks.ODLineLayer('c1', lines, {
+        'animation' : false,
+        'curveness' : 0,
+        'globalCompositeOperation' : 'lighter',
+        'symbol' : {
+            'lineWidth' : 2,
+            'lineColor' : 'rgba(2, 166, 253, 0.03)',
         }
-    );
+    }).addTo(map);
+
+    // animated OD Lines
+    var layer = new maptalks.ODLineLayer('c', lines, {
+        'duration' : 30000,
+        'animation' : true,
+        'curveness' : 0,
+        'random' : true,
+        'trail' : 10,
+        'symbol' : {
+            'lineColor' : '#fff'
+        }
+    }).addTo(map);
 </script>
 </body>
 </html>
