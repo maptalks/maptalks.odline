@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OD Curves</title>
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.css">
-    <script type="text/javascript" src="https://unpkg.com/maptalks@<2.0.0/dist/maptalks.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/maptalks/dist/maptalks.css">
+    <script type="text/javascript" src="https://unpkg.com/maptalks/dist/maptalks.min.js"></script>
     <script type="text/javascript" src="../dist/maptalks.odline.js"></script>
     <script type="text/javascript" src="geocoord.js"></script>
     <style type="text/css">
@@ -65,7 +65,7 @@
             //curves
             var lineLayer = new maptalks.ODLineLayer('c', lines, {
                 'duration' : 10000,
-                'animation' : true,
+                'animation' : false,
                 'curveness' : 0.5,
                 'random' : true,
                 'symbol' : {

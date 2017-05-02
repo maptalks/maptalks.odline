@@ -1,7 +1,7 @@
 import * as maptalks from 'maptalks';
 
 function quadraticAt(p0, p1, p2, t) {
-    var onet = 1 - t;
+    const onet = 1 - t;
     return onet * (onet * p0 + 2 * t * p1) + t * t * p2;
 }
 
@@ -12,6 +12,11 @@ const options = {
     'curveness'     : 0.2,
     'trail'         : 20,
     'globalCompositeOperation' : 'lighter'
+};
+
+const defaultSymbol = {
+    'lineColor' : '#000',
+    'lineWidth' : 2
 };
 
 export class ODLineLayer extends maptalks.ParticleLayer {
@@ -40,7 +45,7 @@ export class ODLineLayer extends maptalks.ParticleLayer {
     }
 
     identify() {
-
+        return null;
     }
 
     getParticles(t) {
@@ -49,11 +54,11 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         }
         const map = this.getMap();
         const scale = map.getScale();
-        var r = ((t - this._animStartTime) % this.options['duration']) / this.options['duration'];
+        let r = ((t - this._animStartTime) % this.options['duration']) / this.options['duration'];
         const particles = [],
             empty = {};
-        var points, x, y, style;
-        var p0, p1, cp;
+        let points, x, y, style;
+        let p0, p1, cp;
         for (let i = 0, l = this._dataToDraw.length; i < l; i++) {
             if (this.options['random']) {
                 r = ((t - this._animStartTime - this._dataToDraw[i]['time']) % this.options['duration']) / this.options['duration'];
@@ -124,8 +129,8 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         };
         const data = this.getData();
         if (options['clipExtent']) {
-            let clipExtent = new maptalks.Extent(options['clipExtent']);
-            let clipped = [];
+            const clipExtent = new maptalks.Extent(options['clipExtent']);
+            const clipped = [];
             for (let i = 0, len = data.length; i < len; i++) {
                 if (clipExtent.contains(new maptalks.Coordinate(data[i][0], data[i][1]))) {
                     clipped.push(data[i]);
@@ -163,15 +168,15 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         const map = this.getMap();
         const scale = map.getScale();
         const empty = {};
-        const defaultSymbol = this.options['symbol'] || empty;
-        var points, style;
-        var p0, p1, p2;
+        const symbol = this.options['symbol'] || defaultSymbol;
+        let points, style;
+        let p0, p1, p2;
         ctx.lineCap = 'round';
         for (let i = 0, l = this._dataToDraw.length; i < l; i++) {
             points = this._dataToDraw[i].points;
             style = this._data[i]['symbol'] || empty;
-            ctx.strokeStyle = style['lineColor'] || defaultSymbol['lineColor'] || 'rgba(255, 255, 255, 0.01)';//'rgba(135, 196, 240, 0.1)';
-            ctx.lineWidth = style['lineWidth'] || defaultSymbol['lineWidth'] ||  1;
+            ctx.strokeStyle = style['lineColor'] || symbol['lineColor'] || 'rgba(255, 255, 255, 0.01)';//'rgba(135, 196, 240, 0.1)';
+            ctx.lineWidth = style['lineWidth'] || symbol['lineWidth'] ||  1;
             ctx.beginPath();
             p0 = map._pointToContainerPoint(points[0].multi(1 / scale));
             ctx.moveTo(p0.x, p0.y);
@@ -194,19 +199,19 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         }
         const curveness = this.options['curveness'];
         const map = this.getMap(),
-            maxZ = map.getMaxZoom();
+            maxZ = map.getMaxNativeZoom();
         const dataToDraw = [];
-        var p1, p2;
+        let p1, p2;
         for (let i = 0, l = this._data.length; i < l; i++) {
             p1 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[0]), maxZ);
             p2 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[1]), maxZ);
-            let points = [p1, p2];
+            const points = [p1, p2];
             if (curveness) {
-                let distance = p2.distanceTo(p1);
-                let normal = p1.substract(p2)._unit()._perp();
-                let middle = p1.add(p2)._multi(1 / 2);
-                let curveLen = curveness * distance;
-                let ctrlPoint = new maptalks.Point(middle.x + curveLen * normal.x, middle.y + curveLen * normal.y);
+                const distance = p2.distanceTo(p1);
+                const normal = p1.substract(p2)._unit()._perp();
+                const middle = p1.add(p2)._multi(1 / 2);
+                const curveLen = curveness * distance;
+                const ctrlPoint = new maptalks.Point(middle.x + curveLen * normal.x, middle.y + curveLen * normal.y);
                 points.push(ctrlPoint);
             }
             dataToDraw.push({
