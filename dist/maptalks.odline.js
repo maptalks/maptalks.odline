@@ -3,6 +3,9 @@
  * LICENSE : MIT
  * (c) 2016-2017 maptalks.org
  */
+/*!
+ * requires maptalks@^0.23.1 
+ */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('maptalks')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'maptalks'], factory) :
@@ -29,6 +32,11 @@ var options = {
     'curveness': 0.2,
     'trail': 20,
     'globalCompositeOperation': 'lighter'
+};
+
+var defaultSymbol = {
+    'lineColor': '#000',
+    'lineWidth': 2
 };
 
 var ODLineLayer = function (_maptalks$ParticleLay) {
@@ -62,7 +70,9 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         return this;
     };
 
-    ODLineLayer.prototype.identify = function identify() {};
+    ODLineLayer.prototype.identify = function identify() {
+        return null;
+    };
 
     ODLineLayer.prototype.getParticles = function getParticles(t) {
         if (!this._animStartTime) {
@@ -73,8 +83,13 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         var r = (t - this._animStartTime) % this.options['duration'] / this.options['duration'];
         var particles = [],
             empty = {};
-        var points, x, y, style;
-        var p0, p1, cp;
+        var points = void 0,
+            x = void 0,
+            y = void 0,
+            style = void 0;
+        var p0 = void 0,
+            p1 = void 0,
+            cp = void 0;
         for (var i = 0, l = this._dataToDraw.length; i < l; i++) {
             if (this.options['random']) {
                 r = (t - this._animStartTime - this._dataToDraw[i]['time']) % this.options['duration'] / this.options['duration'];
@@ -187,15 +202,18 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         var map = this.getMap();
         var scale = map.getScale();
         var empty = {};
-        var defaultSymbol = this.options['symbol'] || empty;
-        var points, style;
-        var p0, p1, p2;
+        var symbol = this.options['symbol'] || defaultSymbol;
+        var points = void 0,
+            style = void 0;
+        var p0 = void 0,
+            p1 = void 0,
+            p2 = void 0;
         ctx.lineCap = 'round';
         for (var i = 0, l = this._dataToDraw.length; i < l; i++) {
             points = this._dataToDraw[i].points;
             style = this._data[i]['symbol'] || empty;
-            ctx.strokeStyle = style['lineColor'] || defaultSymbol['lineColor'] || 'rgba(255, 255, 255, 0.01)'; //'rgba(135, 196, 240, 0.1)';
-            ctx.lineWidth = style['lineWidth'] || defaultSymbol['lineWidth'] || 1;
+            ctx.strokeStyle = style['lineColor'] || symbol['lineColor'] || 'rgba(255, 255, 255, 0.01)'; //'rgba(135, 196, 240, 0.1)';
+            ctx.lineWidth = style['lineWidth'] || symbol['lineWidth'] || 1;
             ctx.beginPath();
             p0 = map._pointToContainerPoint(points[0].multi(1 / scale));
             ctx.moveTo(p0.x, p0.y);
@@ -217,9 +235,10 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         }
         var curveness = this.options['curveness'];
         var map = this.getMap(),
-            maxZ = map.getMaxZoom();
+            maxZ = map.getMaxNativeZoom();
         var dataToDraw = [];
-        var p1, p2;
+        var p1 = void 0,
+            p2 = void 0;
         for (var i = 0, l = this._data.length; i < l; i++) {
             p1 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[0]), maxZ);
             p2 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[1]), maxZ);
@@ -250,5 +269,7 @@ ODLineLayer.registerJSONType('ODLineLayer');
 exports.ODLineLayer = ODLineLayer;
 
 Object.defineProperty(exports, '__esModule', { value: true });
+
+typeof console !== 'undefined' && console.log('maptalks.odline v0.1.0, requires maptalks@^0.23.1.');
 
 })));
