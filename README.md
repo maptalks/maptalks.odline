@@ -26,7 +26,7 @@ As a plugin, ```maptalks.odline``` must be loaded after ```maptalks.js``` in bro
 <script type="text/javascript" src="https://unpkg.com/maptalks/dist/maptalks.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/maptalks.odline/dist/maptalks.odline.min.js"></script>
 <script>
-var ODLineLayer = new maptalks.odlineLayer('od', data)
+var odlayer = new maptalks.ODLineLayer('od', data)
     .addTo(map);
 </script>
 ```
@@ -74,7 +74,7 @@ set new data to the layer
 export the ODLineLayer's JSON.
 
 ```javascript
-var json = ODLinelayer.toJSON();
+var json = odlayer.toJSON();
 ```
 
 **Returns** `Object`
