@@ -26,8 +26,7 @@ As a plugin, ```maptalks.odline``` must be loaded after ```maptalks.js``` in bro
 <script type="text/javascript" src="https://unpkg.com/maptalks/dist/maptalks.min.js"></script>
 <script type="text/javascript" src="https://unpkg.com/maptalks.odline/dist/maptalks.odline.min.js"></script>
 <script>
-// ecOptions is echarts' options
-var ODLineLayer = new maptalks.odlineLayer('e3', ecOptions)
+var ODLineLayer = new maptalks.odlineLayer('od', data)
     .addTo(map);
 </script>
 ```
@@ -66,7 +65,7 @@ get layer's data
 
 set new data to the layer
 
-* data **Array[]** echarts options
+* data **Array[]** origin-destination data
 
 **Returns** `this`
 
