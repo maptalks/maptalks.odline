@@ -45,7 +45,7 @@ new maptalks.ODLineLayer(id, data, options)
 ```
 
 * id **String** layer id
-* data **Array[]** origin-destination data, `[{ coordinates : [[x, y], [x, y]], symbol : {..} }, { coordinates : [[x, y], [x, y]], symbol : {..} } ..]`
+* data **Object[]** origin-destination data, `[{ coordinates : [[x, y], [x, y]], symbol : {..} }, { coordinates : [[x, y], [x, y]], symbol : {..} } ..]`
 * options **Object** options
     * animation **Boolean** is animation? true or false (true by default)
     * random **Boolean** whether the animation starts randomly, true or false (false by default)
@@ -59,13 +59,13 @@ new maptalks.ODLineLayer(id, data, options)
 
 get layer's data
 
-**Returns** `Array[]`
+**Returns** `Object[]`
 
 ### `setData(data)`
 
 set new data to the layer
 
-* data **Array[]** origin-destination data
+* data **Object[]** origin-destination data
 
 **Returns** `this`
 
