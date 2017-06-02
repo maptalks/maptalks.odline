@@ -36,7 +36,7 @@ IE 9-11, Chrome, Firefox, other modern and mobile browsers.
 
 ## API Reference
 
-```ODLineLayer``` is a subclass of [maptalks.ParticleLayer](http://docs.maptalks.org/api/maptalks.ParticleLayer.html) and inherits all the methods of its parent.
+```ODLineLayer``` is a subclass of [maptalks.ParticleLayer](https://maptalks.github.io/docs/api/ParticleLayer.html) and inherits all the methods of its parent.
 
 ### `Constructor`
 
@@ -53,7 +53,7 @@ new maptalks.ODLineLayer(id, data, options)
     * curveness **Number** curveness of the od-line, from 0(straight) to 1  (0.2 by default)
     * trail **Number** trail length of the particle when animating (20 by default)
     * globalCompositeOperation **String** [globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation) of the canvas when drawing particles
-    * Other options defined in [maptalks.ParticleLayer](http://docs.maptalks.org/api/maptalks.ParticleLayer.html)
+    * Other options defined in [maptalks.ParticleLayer](https://maptalks.github.io/docs/api/ParticleLayer.html)
 
 ### `getData()`
 
