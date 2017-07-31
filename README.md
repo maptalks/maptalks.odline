@@ -41,6 +41,8 @@ IE 9-11, Chrome, Firefox, other modern and mobile browsers.
 ### `Constructor`
 
 ```javascript
+// data's format
+// [{ coordinates : [[x, y], [x, y]], symbol : {..} }, { coordinates : [[x, y], [x, y]], symbol : {..} } ..]
 new maptalks.ODLineLayer(id, data, options)
 ```
 
@@ -49,7 +51,8 @@ new maptalks.ODLineLayer(id, data, options)
 * options **Object** options
     * animation **Boolean** is animation? true or false (true by default)
     * random **Boolean** whether the animation starts randomly, true or false (false by default)
-    * duration **Number** duration of a animation cycle in ms (6000 by default)
+    * animationDuration **Number** duration of a animation cycle in ms (6000 by default)
+    * animationOnce **Boolean** does animation only run once? (false by default)
     * curveness **Number** curveness of the od-line, from 0(straight) to 1  (0.2 by default)
     * trail **Number** trail length of the particle when animating (20 by default)
     * globalCompositeOperation **String** [globalCompositeOperation](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation) of the canvas when drawing particles
