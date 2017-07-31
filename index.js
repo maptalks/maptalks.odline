@@ -7,8 +7,9 @@ function quadraticAt(p0, p1, p2, t) {
 
 const options = {
     'animation'     : true,
+    'animationOnce' : false,
+    'animatinDuration' : 6000,
     'random'        : false,
-    'duration'      : 6000,
     'curveness'     : 0.2,
     'trail'         : 20,
     'globalCompositeOperation' : 'lighter'
@@ -52,16 +53,21 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         if (!this._animStartTime) {
             this._animStartTime = Date.now();
         }
-        const map = this.getMap();
-        const scale = map.getScale();
-        let r = ((t - this._animStartTime) % this.options['duration']) / this.options['duration'];
+        const map = this.getMap(),
+            scale = map.getScale(),
+            elapsed = t - this._animStartTime,
+            duration = this.options['animationDuration'];
+        if (this.options['animationOnce'] && elapsed > duration) {
+            return [];
+        }
+        let r = (elapsed % duration) / duration;
         const particles = [],
             empty = {};
         let points, x, y, style;
         let p0, p1, cp;
         for (let i = 0, l = this._dataToDraw.length; i < l; i++) {
             if (this.options['random']) {
-                r = ((t - this._animStartTime - this._dataToDraw[i]['time']) % this.options['duration']) / this.options['duration'];
+                r = ((t - this._animStartTime - this._dataToDraw[i]['time']) % duration) / duration;
                 if (r < 0) {
                     r = 0;
                 }
@@ -216,7 +222,7 @@ export class ODLineLayer extends maptalks.ParticleLayer {
             }
             dataToDraw.push({
                 'points' : points,
-                'time'   : Math.random() * this.options['duration']
+                'time'   : Math.random() * this.options['animationDuration']
             });
         }
         this._dataToDraw = dataToDraw;
