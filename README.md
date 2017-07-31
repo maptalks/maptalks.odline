@@ -1,6 +1,6 @@
 # maptalks.odline
 
-[![CircleCI](https://circleci.com/gh/maptalks/maptalks.odline.svg?style=shield)](https://circleci.com/gh/maptalks/maptalks.odline)
+[![CircleCI](https://circleci.com/gh/maptalks/maptalks.odline/tree/master.svg?style=shield)](https://circleci.com/gh/maptalks/maptalks.odline)
 [![NPM Version](https://img.shields.io/npm/v/maptalks.odline.svg)](https://github.com/maptalks/maptalks.odline)
 
 A maptalks Layer to draw OD(Origin-Destination) lines.
