@@ -9,7 +9,7 @@ const options = {
     'animation'     : true,
     'animationOnce' : false,
     'animatinDuration' : 6000,
-    'random'        : false,
+    'animationRandom'        : false,
     'curveness'     : 0.2,
     'trail'         : 20,
     'globalCompositeOperation' : 'lighter'
@@ -71,7 +71,7 @@ export class ODLineLayer extends maptalks.ParticleLayer {
         let points, x, y, style;
         let p0, p1, cp;
         for (let i = 0, l = this._dataToDraw.length; i < l; i++) {
-            if (this.options['random']) {
+            if (this.options['animationRandom']) {
                 r = ((t - this._animStartTime - this._dataToDraw[i]['time']) % duration) / duration;
                 if (r < 0) {
                     r = 0;
