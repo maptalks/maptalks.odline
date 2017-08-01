@@ -1,5 +1,5 @@
 /*!
- * maptalks.odline v0.2.0
+ * maptalks.odline v0.3.0
  * LICENSE : MIT
  * (c) 2016-2017 maptalks.org
  */
@@ -29,7 +29,7 @@ var options = {
     'animation': true,
     'animationOnce': false,
     'animatinDuration': 6000,
-    'random': false,
+    'animationRandom': false,
     'curveness': 0.2,
     'trail': 20,
     'globalCompositeOperation': 'lighter'
@@ -102,7 +102,7 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
             p1 = void 0,
             cp = void 0;
         for (var i = 0, l = this._dataToDraw.length; i < l; i++) {
-            if (this.options['random']) {
+            if (this.options['animationRandom']) {
                 r = (t - this._animStartTime - this._dataToDraw[i]['time']) % duration / duration;
                 if (r < 0) {
                     r = 0;
@@ -281,6 +281,6 @@ exports.ODLineLayer = ODLineLayer;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-typeof console !== 'undefined' && console.log('maptalks.odline v0.2.0, requires maptalks@^0.23.1.');
+typeof console !== 'undefined' && console.log('maptalks.odline v0.3.0, requires maptalks@^0.23.1.');
 
 })));
