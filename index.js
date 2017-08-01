@@ -36,6 +36,7 @@ export class ODLineLayer extends maptalks.ParticleLayer {
 
     setData(data) {
         this._data = data;
+        delete this._endEventFired;
         if (this.getMap()) {
             this._prepareData();
             if (this._getRenderer()) {
@@ -58,11 +59,15 @@ export class ODLineLayer extends maptalks.ParticleLayer {
             elapsed = t - this._animStartTime,
             duration = this.options['animationDuration'];
         if (this.options['animationOnce'] && elapsed > duration) {
+            if (!this._endEventFired) {
+                this._endEventFired = true;
+                this.fire('animateend');
+            }
             return [];
         }
+        const symbol = this.options['symbol'] || defaultSymbol;
         let r = (elapsed % duration) / duration;
-        const particles = [],
-            empty = {};
+        const particles = [];
         let points, x, y, style;
         let p0, p1, cp;
         for (let i = 0, l = this._dataToDraw.length; i < l; i++) {
@@ -74,7 +79,7 @@ export class ODLineLayer extends maptalks.ParticleLayer {
             }
             if (r > 0) {
                 points = this._dataToDraw[i]['points'];
-                style = this._data[i]['symbol'] || empty;
+                style = this._data[i]['symbol'] || symbol;
                 p0 = points[0];
                 p1 = points[1];
                 if (points[2]) {
