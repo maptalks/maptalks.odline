@@ -1,5 +1,5 @@
 /*!
- * maptalks.odline v0.1.0
+ * maptalks.odline v0.2.0
  * LICENSE : MIT
  * (c) 2016-2017 maptalks.org
  */
@@ -62,6 +62,7 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
 
     ODLineLayer.prototype.setData = function setData(data) {
         this._data = data;
+        delete this._endEventFired;
         if (this.getMap()) {
             this._prepareData();
             if (this._getRenderer()) {
@@ -84,11 +85,15 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
             elapsed = t - this._animStartTime,
             duration = this.options['animationDuration'];
         if (this.options['animationOnce'] && elapsed > duration) {
+            if (!this._endEventFired) {
+                this._endEventFired = true;
+                this.fire('animateend');
+            }
             return [];
         }
+        var symbol = this.options['symbol'] || defaultSymbol;
         var r = elapsed % duration / duration;
-        var particles = [],
-            empty = {};
+        var particles = [];
         var points = void 0,
             x = void 0,
             y = void 0,
@@ -105,7 +110,7 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
             }
             if (r > 0) {
                 points = this._dataToDraw[i]['points'];
-                style = this._data[i]['symbol'] || empty;
+                style = this._data[i]['symbol'] || symbol;
                 p0 = points[0];
                 p1 = points[1];
                 if (points[2]) {
@@ -276,6 +281,6 @@ exports.ODLineLayer = ODLineLayer;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-typeof console !== 'undefined' && console.log('maptalks.odline v0.1.0, requires maptalks@^0.23.1.');
+typeof console !== 'undefined' && console.log('maptalks.odline v0.2.0, requires maptalks@^0.23.1.');
 
 })));
