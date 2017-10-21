@@ -103,7 +103,7 @@ $ npm install
 
 * Watch source changes and generate runnable bundle repeatedly
 ```shell
-$ gulp watch
+$ npm run dev
 ```
 
 * Tests
@@ -118,7 +118,7 @@ $ gulp tdd
 
 * Package and generate minified bundles to dist directory
 ```shell
-$ gulp minify
+$ npm run build
 ```
 
 * Lint
