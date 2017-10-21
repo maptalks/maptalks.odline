@@ -6,11 +6,7 @@
 /*!
  * requires maptalks@>=0.32.0 
  */
-(function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('maptalks')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'maptalks'], factory) :
-	(factory((global.maptalks = global.maptalks || {}),global.maptalks));
-}(this, (function (exports,maptalks) { 'use strict';
+import { Coordinate, Extent, ParticleLayer, Point, Util } from 'maptalks';
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 
@@ -122,7 +118,7 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
                     y = p0.y + r * (p1.y - p0.y);
                 }
                 particles.push({
-                    'point': map._pointToContainerPoint(new maptalks.Point(x, y)._multi(1 / scale)),
+                    'point': map._pointToContainerPoint(new Point(x, y)._multi(1 / scale)),
                     'r': (style['lineWidth'] || 3) / 2,
                     'color': style['lineColor']
                 });
@@ -170,10 +166,10 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         };
         var data = this.getData();
         if (options['clipExtent']) {
-            var clipExtent = new maptalks.Extent(options['clipExtent']);
+            var clipExtent = new Extent(options['clipExtent']);
             var clipped = [];
             for (var i = 0, len = data.length; i < len; i++) {
-                if (clipExtent.contains(new maptalks.Coordinate(data[i][0], data[i][1]))) {
+                if (clipExtent.contains(new Coordinate(data[i][0], data[i][1]))) {
                     clipped.push(data[i]);
                 }
             }
@@ -203,7 +199,7 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
     };
 
     ODLineLayer.prototype._precise = function _precise(n) {
-        return maptalks.Util.round(n * 100) / 100;
+        return Util.round(n * 100) / 100;
     };
 
     ODLineLayer.prototype._drawLines = function _drawLines(ctx) {
@@ -251,15 +247,15 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
         var p1 = void 0,
             p2 = void 0;
         for (var i = 0, l = this._data.length; i < l; i++) {
-            p1 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[0]), maxZ);
-            p2 = map.coordinateToPoint(new maptalks.Coordinate(this._data[i].coordinates[1]), maxZ);
+            p1 = map.coordinateToPoint(new Coordinate(this._data[i].coordinates[0]), maxZ);
+            p2 = map.coordinateToPoint(new Coordinate(this._data[i].coordinates[1]), maxZ);
             var points = [p1, p2];
             if (curveness) {
                 var distance = p2.distanceTo(p1);
                 var normal = p1.substract(p2)._unit()._perp();
                 var middle = p1.add(p2)._multi(1 / 2);
                 var curveLen = curveness * distance;
-                var ctrlPoint = new maptalks.Point(middle.x + curveLen * normal.x, middle.y + curveLen * normal.y);
+                var ctrlPoint = new Point(middle.x + curveLen * normal.x, middle.y + curveLen * normal.y);
                 points.push(ctrlPoint);
             }
             dataToDraw.push({
@@ -271,16 +267,12 @@ var ODLineLayer = function (_maptalks$ParticleLay) {
     };
 
     return ODLineLayer;
-}(maptalks.ParticleLayer);
+}(ParticleLayer);
 
 ODLineLayer.mergeOptions(options);
 
 ODLineLayer.registerJSONType('ODLineLayer');
 
-exports.ODLineLayer = ODLineLayer;
-
-Object.defineProperty(exports, '__esModule', { value: true });
+export { ODLineLayer };
 
 typeof console !== 'undefined' && console.log('maptalks.odline v0.4.0, requires maptalks@>=0.32.0.');
-
-})));
