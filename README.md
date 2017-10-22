@@ -113,7 +113,7 @@ $ npm test
 
 * Watch source changes and run tests repeatedly
 ```shell
-$ gulp tdd
+$ npm run tdd
 ```
 
 * Package and generate minified bundles to dist directory

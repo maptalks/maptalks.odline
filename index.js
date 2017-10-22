@@ -6,11 +6,11 @@ function quadraticAt(p0, p1, p2, t) {
 }
 
 const options = {
-    'animation'     : true,
+    'animation'     : false,
     'animationOnce' : false,
-    'animatinDuration' : 6000,
-    'animationRandom'        : false,
-    'curveness'     : 0.2,
+    'animationDuration' : 6000,
+    'animationRandom'   : false,
+    'curveness'     : 0,
     'trail'         : 20,
     'globalCompositeOperation' : 'lighter'
 };

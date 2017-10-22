@@ -16,6 +16,7 @@
     "version": "gulp minify && git add -A dist",
     "lint": "eslint index.js test/**/*.js",
     "test": "gulp test",
+    "tdd" : "gulp tdd",
     "pretest": "npm run lint",
     "prepublish": "npm run lint && gulp minify",
     "dev": "gulp watch",

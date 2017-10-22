@@ -16,9 +16,19 @@ describe('D3Layer', function () {
         maptalks.DomUtil.removeDomNode(container);
     });
 
-    it('should display when added with one line', function (done) {
+    it('should be able to get particles when added with animation', function (done) {
         var data = [{ coordinates : [map.getCenter().add(-0.1, 0).toArray(), map.getCenter().add(0.1, 0).toArray()] }];
-        var layer = new maptalks.ODLineLayer('g', data, { animation : false, curveness : 0 });
+        var layer = new maptalks.ODLineLayer('g', data, { animation : true }).addTo(map);
+        setTimeout(function () {
+            var particles = layer.getParticles(Date.now() + 1000);
+            expect(particles.length).to.be.above(0);
+            done();
+        }, 200);
+    });
+
+    it('should display when added with one line with default options', function (done) {
+        var data = [{ coordinates : [map.getCenter().add(-0.1, 0).toArray(), map.getCenter().add(0.1, 0).toArray()] }];
+        var layer = new maptalks.ODLineLayer('g', data);
         layer.on('layerload', function () {
             expect(layer).to.be.painted(0, 0);
             done();
@@ -96,4 +106,5 @@ describe('D3Layer', function () {
         });
         map.addLayer(layer);
     });
+
 });
