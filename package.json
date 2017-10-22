@@ -1,6 +1,6 @@
 {
   "name": "maptalks.odline",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A maptalks Layer to draw ODLines.",
   "license": "MIT",
   "repository": {
@@ -16,7 +16,7 @@
     "version": "gulp minify && git add -A dist",
     "lint": "eslint index.js test/**/*.js",
     "test": "gulp test",
-    "tdd" : "gulp tdd",
+    "tdd": "gulp tdd",
     "pretest": "npm run lint",
     "prepublish": "npm run lint && gulp minify",
     "dev": "gulp watch",

@@ -1,5 +1,5 @@
 /*!
- * maptalks.odline v0.4.0
+ * maptalks.odline v0.4.1
  * LICENSE : MIT
  * (c) 2016-2017 maptalks.org
  */
@@ -22,11 +22,11 @@ function quadraticAt(p0, p1, p2, t) {
 }
 
 var options = {
-    'animation': true,
+    'animation': false,
     'animationOnce': false,
-    'animatinDuration': 6000,
+    'animationDuration': 6000,
     'animationRandom': false,
-    'curveness': 0.2,
+    'curveness': 0,
     'trail': 20,
     'globalCompositeOperation': 'lighter'
 };
@@ -275,4 +275,4 @@ ODLineLayer.registerJSONType('ODLineLayer');
 
 export { ODLineLayer };
 
-typeof console !== 'undefined' && console.log('maptalks.odline v0.4.0, requires maptalks@>=0.32.0.');
+typeof console !== 'undefined' && console.log('maptalks.odline v0.4.1, requires maptalks@>=0.32.0.');
