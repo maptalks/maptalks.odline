@@ -51,7 +51,7 @@ new maptalks.ODLineLayer(id, data, options)
 * data **Object[]** origin-destination data, `[{ coordinates : [[x, y], [x, y]], symbol : {..} }, { coordinates : [[x, y], [x, y]], symbol : {..} } ..]`
 * options **Object** options
     * animation **Boolean** is animation? true or false (true by default)
-    * random **Boolean** whether the animation starts randomly, true or false (false by default)
+    * animationRandom **Boolean** whether the animation starts randomly, true or false (false by default)
     * animationDuration **Number** duration of a animation cycle in ms (6000 by default)
     * animationOnce **Boolean** does animation only run once? (false by default)
     * curveness **Number** curveness of the od-line, from 0(straight) to 1  (0.2 by default)
