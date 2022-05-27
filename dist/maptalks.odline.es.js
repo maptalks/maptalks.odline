@@ -1,5 +1,5 @@
 /*!
- * maptalks.odline v0.4.1
+ * maptalks.odline v0.4.2
  * LICENSE : MIT
  * (c) 2016-2017 maptalks.org
  */
@@ -275,4 +275,4 @@ ODLineLayer.registerJSONType('ODLineLayer');
 
 export { ODLineLayer };
 
-typeof console !== 'undefined' && console.log('maptalks.odline v0.4.1, requires maptalks@>=0.32.0.');
+typeof console !== 'undefined' && console.log('maptalks.odline v0.4.2, requires maptalks@>=0.32.0.');
