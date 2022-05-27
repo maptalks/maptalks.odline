@@ -12,7 +12,6 @@
   "jsnext:main": "dist/maptalks.odline.es.js",
   "browser": "dist/maptalks.odline.js",
   "scripts": {
-    "preversion": "npm test",
     "lint": "eslint index.js test/**/*.js",
     "test": "gulp test",
     "tdd": "gulp tdd",
