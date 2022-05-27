@@ -46,8 +46,5 @@
     "minimist": "^1.2.0",
     "mocha": "^2.4.5"
   },
-  "peerDependencies": {
-    "maptalks": ">=0.32.0"
-  },
   "dependencies": {}
 }
