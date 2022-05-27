@@ -13,7 +13,6 @@
   "browser": "dist/maptalks.odline.js",
   "scripts": {
     "preversion": "npm test",
-    "version": "gulp minify && git add -A dist",
     "lint": "eslint index.js test/**/*.js",
     "test": "gulp test",
     "tdd": "gulp tdd",
