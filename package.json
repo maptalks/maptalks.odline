@@ -11,6 +11,11 @@
   "module": "dist/maptalks.odline.es.js",
   "jsnext:main": "dist/maptalks.odline.es.js",
   "browser": "dist/maptalks.odline.js",
+  "files": [
+    "dist/maptalks.odline.js",
+    "dist/maptalks.odline.es.js",
+    "dist/maptalks.odline.min.js"
+  ],
   "scripts": {
     "lint": "eslint index.js test/**/*.js",
     "test": "gulp test",
